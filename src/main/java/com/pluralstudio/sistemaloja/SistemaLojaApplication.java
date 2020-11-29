@@ -13,6 +13,7 @@ import com.pluralstudio.sistemaloja.domain.Cidade;
 import com.pluralstudio.sistemaloja.domain.Cliente;
 import com.pluralstudio.sistemaloja.domain.Endereco;
 import com.pluralstudio.sistemaloja.domain.Estado;
+import com.pluralstudio.sistemaloja.domain.ItemPedido;
 import com.pluralstudio.sistemaloja.domain.Pagamento;
 import com.pluralstudio.sistemaloja.domain.PagamentoComBoleto;
 import com.pluralstudio.sistemaloja.domain.PagamentoComCartao;
@@ -25,6 +26,7 @@ import com.pluralstudio.sistemaloja.repositories.CidadeRepository;
 import com.pluralstudio.sistemaloja.repositories.ClienteRepository;
 import com.pluralstudio.sistemaloja.repositories.EnderecoRepository;
 import com.pluralstudio.sistemaloja.repositories.EstadoRepository;
+import com.pluralstudio.sistemaloja.repositories.ItemPedidoRepository;
 import com.pluralstudio.sistemaloja.repositories.PagamentoRepository;
 import com.pluralstudio.sistemaloja.repositories.PedidoRepository;
 import com.pluralstudio.sistemaloja.repositories.ProdutoRepository;
@@ -55,6 +57,9 @@ public class SistemaLojaApplication implements CommandLineRunner{
 	
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
+	
+	@Autowired
+	private ItemPedidoRepository itemPedidoRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(SistemaLojaApplication.class, args);
@@ -119,6 +124,21 @@ public class SistemaLojaApplication implements CommandLineRunner{
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1,ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pgto1,pgto2));
+		
+		ItemPedido ip1 = new ItemPedido(ped1, p1, 0.00, 1, 2000.00);
+		ItemPedido ip2 = new ItemPedido(ped1, p3, 0.00, 2, 80.00);
+		ItemPedido ip3 = new ItemPedido(ped2, p2, 100.00, 1, 800.00);
+		
+		ped1.getItens().addAll(Arrays.asList(ip1,ip2));
+		ped2.getItens().addAll(Arrays.asList(ip3));
+		
+		p1.getItens().addAll(Arrays.asList(ip1));
+		p2.getItens().addAll(Arrays.asList(ip3));
+		p3.getItens().addAll(Arrays.asList(ip2));
+		
+		itemPedidoRepository.saveAll(Arrays.asList(ip1,ip2,ip3));
+		
+		
 	}
 	
 	
