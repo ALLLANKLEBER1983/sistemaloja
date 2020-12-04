@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.pluralstudio.sistemaloja.domain.Categoria;
+import com.pluralstudio.sistemaloja.dto.CategoriaDTO;
 import com.pluralstudio.sistemaloja.repositories.CategoriaRepository;
 import com.pluralstudio.sistemaloja.services.exception.DataIntegrityException;
 import com.pluralstudio.sistemaloja.services.exception.ObjectNotFoundException;
@@ -59,6 +60,10 @@ public class CategoriaService {
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction),orderBy);
 		return repo.findAll(pageRequest);
 		
+	}
+	
+	public Categoria fromDTO(CategoriaDTO objDTO) {
+		return new Categoria(objDTO.getId(),objDTO.getNome());
 	}
 
 
