@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pluralstudio.sistemaloja.domain.Cliente;
-import com.pluralstudio.sistemaloja.domain.Cliente;
 import com.pluralstudio.sistemaloja.dto.ClienteDTO;
 import com.pluralstudio.sistemaloja.services.ClienteService;
 

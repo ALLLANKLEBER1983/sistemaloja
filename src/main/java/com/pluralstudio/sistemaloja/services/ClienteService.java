@@ -11,7 +11,6 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.pluralstudio.sistemaloja.domain.Cliente;
-import com.pluralstudio.sistemaloja.domain.Cliente;
 import com.pluralstudio.sistemaloja.dto.ClienteDTO;
 import com.pluralstudio.sistemaloja.repositories.ClienteRepository;
 import com.pluralstudio.sistemaloja.services.exception.DataIntegrityException;
