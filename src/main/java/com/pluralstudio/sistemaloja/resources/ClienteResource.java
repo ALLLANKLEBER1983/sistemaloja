@@ -1,5 +1,6 @@
 package com.pluralstudio.sistemaloja.resources;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.pluralstudio.sistemaloja.domain.Cliente;
+import com.pluralstudio.sistemaloja.domain.Cliente;
+import com.pluralstudio.sistemaloja.dto.ClienteDTO;
+import com.pluralstudio.sistemaloja.dto.ClienteNewDTO;
 import com.pluralstudio.sistemaloja.dto.ClienteDTO;
 import com.pluralstudio.sistemaloja.services.ClienteService;
 
@@ -56,6 +61,16 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listDto);
 		
 		}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO){
+		Cliente obj = service.fromDTO(objDTO);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/id").
+				buildAndExpand(obj.getId()).toUri();
+		return ResponseEntity.created(uri).build();
+		
+	}
 	
 	@RequestMapping(value = "/page",method =RequestMethod.GET )
 	public ResponseEntity<Page<ClienteDTO>> findPage(
